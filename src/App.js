@@ -3,7 +3,6 @@ import "./App.css";
 import Weather from "./Weather";
 import Temperature from "./Temperature";
 import DateTime from "./DateTime";
-import Icons from "./Icons";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -28,17 +27,25 @@ function App() {
             <DateTime date={weatherData.date} />
           </div>
 
-          <div className="grid">
-            <div className="columns-2">
-              <div className="weather-temperature">
-                {/* <Icons code={props.data.icon} /> */}
-                <Temperature temperature={weatherData.temperature} />
-              </div>
-              <div className="text-transform: capitalize">
-                <p>{weatherData.description}</p>
-                <p>Humidity: {weatherData.humidity}%</p>
-                <p>Wind: {weatherData.wind} km/h</p>
-              </div>
+          <div className="grid grid-cols-3 gap-2">
+            <div className="weather-temperature">
+              <Temperature temperature={weatherData.temperature} />
+            </div>
+            <div>
+              {weatherData.icon && (
+                <img
+                  src={`http://openweathermap.org/img/wn/${weatherData.icon}.png`}
+                  alt={weatherData.description}
+                  style={{ width: "80px", height: "80px" }}
+                />
+              )}
+            </div>
+            <div>
+              <p className="text-transform: capitalize">
+                {weatherData.description}
+              </p>
+              <p>Humidity: {weatherData.humidity}%</p>
+              <p>Wind: {weatherData.wind} km/h</p>
             </div>
           </div>
         </div>
