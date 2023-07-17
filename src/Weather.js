@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
 export default function Weather({ setWeatherData }) {
@@ -8,19 +8,22 @@ export default function Weather({ setWeatherData }) {
     handleSearch();
   }, [handleSearch]);
 
-  function handleSearch(event) {
-    if (event) {
-      event.preventDefault();
-    }
+  const handleSearch = useCallback(
+    (event) => {
+      if (event) {
+        event.preventDefault();
+      }
 
-    if (query) {
-      const apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
-      const units = "metric";
-      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${apiKey}&units=${units}`;
+      if (query) {
+        const apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+        const units = "metric";
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${apiKey}&units=${units}`;
 
-      axios.get(apiUrl).then(showTemperature);
-    }
-  }
+        axios.get(apiUrl).then(showTemperature);
+      }
+    },
+    [query, showTemperature]
+  );
 
   function updateQuery(event) {
     setQuery(event.target.value);
