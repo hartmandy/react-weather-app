@@ -6,7 +6,7 @@ export default function Weather({ setWeatherData }) {
 
   useEffect(() => {
     handleSearch();
-  }, []); // This empty dependency array ensures this hook only runs on mount
+  }, []);
 
   function handleSearch(event) {
     if (event) {
