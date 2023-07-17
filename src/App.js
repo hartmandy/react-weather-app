@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Weather from "./Weather";
 import Temperature from "./Temperature";
@@ -17,16 +16,16 @@ function App() {
   return (
     <div className="container mx-auto">
       <div className="container max-w-xl mt-40">
-        <div className="rounded border-slate-200 border-2 p-10 shadow-sm">
+        <div className="rounded border-slate-200 border-2 p-10 shadow-sm bg-slate-50">
           <div className="search">
             <div className="row-span-3">
               <Weather />
             </div>
           </div>
 
-          <div className=" col-span-1 mb-10">
-            <h1 id="city"></h1>
-            <ul className="p-0 m-0 text-slate-500">
+          <div className="col-span-1 mb-10">
+            <h1 id="city">Asheville</h1>
+            <ul className="p-0 m-0 text-black">
               <li>
                 Last updated: <span id="date">{weatherData.date}</span>
               </li>
@@ -50,7 +49,7 @@ function App() {
             </div>
 
             <div className="col-start-3">
-              <ul className="p-0 m-0 text-slate-500">
+              <ul className="p-0 m-0 text-black">
                 <li>
                   Humidity: <span id="humidity">{weatherData.humidity}</span>%
                 </li>
@@ -67,6 +66,7 @@ function App() {
         <a
           href="https://github.com/hartmandy/react-weather-app"
           target="_blank"
+          rel="noreferrer"
           alt="Link to Mandy Hartman's Github"
           className="no-underline hover:underline text-slate-500"
         >

@@ -13,7 +13,7 @@ export default function Temperature(props) {
   }
 
   return (
-    <div className="flex justify-center space-x-1 text-xl text-slate-500">
+    <div className="flex justify-center space-x-1 text-xl text-black">
       <h2>{temperature}</h2>
       <a
         href="/"
@@ -24,7 +24,7 @@ export default function Temperature(props) {
       </a>
       <span>|</span>
       <a
-        href="#"
+        href="/"
         className="hover:text-slate-700 hover:underline cursor-pointer"
         onClick={showFahrenheit}
       >
