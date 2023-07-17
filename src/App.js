@@ -25,7 +25,7 @@ function App() {
           </div>
 
           <div className=" col-span-1 mb-10">
-            <h1 mb-0 id="city"></h1>
+            <h1 id="city"></h1>
             <ul className="p-0 m-0 text-slate-500">
               <li>
                 Last updated: <span id="date">{weatherData.date}</span>
@@ -41,7 +41,7 @@ function App() {
                   src={weatherData.imgUrl}
                   alt="Clear"
                   id="icon"
-                  class="float-left mr-1"
+                  className="float-left mr-1"
                   height={64}
                   width={64}
                 />
