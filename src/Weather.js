@@ -36,6 +36,7 @@ export default function Weather({ setWeatherData }) {
       humidity: response.data.main.humidity,
       description: response.data.weather[0].description,
       wind: response.data.wind.speed,
+      icon: response.data.weather[0].icon,
     });
   }
 

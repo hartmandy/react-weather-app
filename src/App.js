@@ -3,6 +3,7 @@ import "./App.css";
 import Weather from "./Weather";
 import Temperature from "./Temperature";
 import DateTime from "./DateTime";
+import Icons from "./Icons";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -13,7 +14,7 @@ function App() {
   return (
     <div className="container mx-auto">
       <div className="container max-w-xl mt-40">
-        <div className="rounded border-slate-200 border-2 p-10 shadow-sm bg-blue-500 text-white tracking-wider">
+        <div className="rounded-xl border-slate-200 border-2 p-10 shadow-sm bg-blue-500 text-white tracking-wider">
           <div className="search">
             <div className="row-span-3">
               <Weather setWeatherData={setWeatherData} />
@@ -30,6 +31,7 @@ function App() {
           <div className="grid">
             <div className="columns-2">
               <div className="weather-temperature">
+                {/* <Icons code={props.data.icon} /> */}
                 <Temperature temperature={weatherData.temperature} />
               </div>
               <div className="text-transform: capitalize">
