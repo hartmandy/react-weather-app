@@ -3,6 +3,7 @@ import axios from "axios";
 
 export default function Weather({ setWeatherData }) {
   const [query, setQuery] = useState("Asheville");
+  const [input, setInput] = useState("Asheville");
 
   const showTemperature = useCallback(
     (response) => {
@@ -21,27 +22,24 @@ export default function Weather({ setWeatherData }) {
 
   const handleSearch = useCallback(
     (event) => {
-      if (event) {
-        event.preventDefault();
-      }
-
-      if (query) {
-        const apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
-        const units = "metric";
-        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${apiKey}&units=${units}`;
-
-        axios.get(apiUrl).then(showTemperature);
-      }
+      event.preventDefault();
+      setQuery(input);
     },
-    [query, showTemperature]
+    [input]
   );
 
   useEffect(() => {
-    handleSearch();
-  }, [handleSearch]);
+    if (query) {
+      const apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+      const units = "metric";
+      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${apiKey}&units=${units}`;
 
-  function updateQuery(event) {
-    setQuery(event.target.value);
+      axios.get(apiUrl).then(showTemperature);
+    }
+  }, [query, showTemperature]);
+
+  function updateInput(event) {
+    setInput(event.target.value);
   }
 
   return (
@@ -51,7 +49,8 @@ export default function Weather({ setWeatherData }) {
           type="search"
           placeholder="Search a city"
           className="w-auto px-4 py-2 mr-2 border-2 border-slate-100 rounded-lg focus:outline-none mb-3 text-black"
-          onChange={updateQuery}
+          onChange={updateInput}
+          value={input}
         />
         <button
           type="submit"
