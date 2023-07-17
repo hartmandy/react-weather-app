@@ -7,9 +7,13 @@ export default function Weather({ setWeatherData }) {
 
   const showTemperature = useCallback(
     (response) => {
+      const timezoneOffset = response.data.timezone * 1000; // convert seconds to milliseconds
+      const localTimestamp = new Date().getTime() + timezoneOffset;
+      const localDate = new Date(localTimestamp);
+
       setWeatherData({
         city: response.data.name,
-        date: new Date(response.data.dt * 1000),
+        date: localDate,
         temperature: Math.round(response.data.main.temp),
         humidity: response.data.main.humidity,
         description: response.data.weather[0].description,
