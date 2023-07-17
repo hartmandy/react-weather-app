@@ -13,13 +13,21 @@ export default function Temperature(props) {
   }
 
   return (
-    <div class="temps weather-temperature">
+    <div className="flex justify-center space-x-1 text-xl text-slate-500">
       <h2>{temperature}</h2>
-      <a href="/" onClick={showCelsius}>
+      <a
+        href="/"
+        className="hover:text-slate-700 hover:underline cursor-pointer"
+        onClick={showCelsius}
+      >
         °C
-      </a>{" "}
-      |{" "}
-      <a href="" onClick={showFahrenheit}>
+      </a>
+      <span>|</span>
+      <a
+        href="#"
+        className="hover:text-slate-700 hover:underline cursor-pointer"
+        onClick={showFahrenheit}
+      >
         °F
       </a>
     </div>

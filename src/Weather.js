@@ -29,9 +29,19 @@ export default function Weather() {
 
   return (
     <div>
-      <form onSubmit={handleSearch}>
-        <input type="search" onChange={updateQuery} />
-        <input type="submit" value="Search" />
+      <form onSubmit={handleSearch} id="search">
+        <input
+          type="search"
+          placeholder="Search a city"
+          className="w-75 px-4 py-2 mr-2 border-2 border-slate-300 rounded-lg focus:outline-none mb-3"
+          onChange={updateQuery}
+        />
+        <button
+          type="button"
+          className="px-4 py-2 bg-slate-500 text-white rounded-lg shadow-md hover:bg-slate-700"
+        >
+          Search
+        </button>
       </form>
       <p>{message}</p>
     </div>
