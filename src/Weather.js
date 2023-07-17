@@ -6,7 +6,7 @@ export default function Weather({ setWeatherData }) {
 
   useEffect(() => {
     handleSearch();
-  }, []);
+  }, [handleSearch]);
 
   function handleSearch(event) {
     if (event) {
