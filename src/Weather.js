@@ -4,9 +4,20 @@ import axios from "axios";
 export default function Weather({ setWeatherData }) {
   const [query, setQuery] = useState("Asheville");
 
-  useEffect(() => {
-    handleSearch();
-  }, [handleSearch]);
+  const showTemperature = useCallback(
+    (response) => {
+      setWeatherData({
+        city: response.data.name,
+        date: new Date(response.data.dt * 1000),
+        temperature: Math.round(response.data.main.temp),
+        humidity: response.data.main.humidity,
+        description: response.data.weather[0].description,
+        wind: response.data.wind.speed,
+        icon: response.data.weather[0].icon,
+      });
+    },
+    [setWeatherData]
+  );
 
   const handleSearch = useCallback(
     (event) => {
@@ -25,22 +36,12 @@ export default function Weather({ setWeatherData }) {
     [query, showTemperature]
   );
 
+  useEffect(() => {
+    handleSearch();
+  }, [handleSearch]);
+
   function updateQuery(event) {
     setQuery(event.target.value);
-  }
-
-  function showTemperature(response) {
-    const timezoneOffsetSeconds = response.data.timezone;
-    const localTimestamp = (response.data.dt + timezoneOffsetSeconds) * 1000;
-    setWeatherData({
-      city: response.data.name,
-      date: new Date(localTimestamp),
-      temperature: Math.round(response.data.main.temp),
-      humidity: response.data.main.humidity,
-      description: response.data.weather[0].description,
-      wind: response.data.wind.speed,
-      icon: response.data.weather[0].icon,
-    });
   }
 
   return (
