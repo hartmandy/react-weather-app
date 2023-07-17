@@ -1,11 +1,5 @@
 body {
-  font-family: Nunito;
-}
-
-h1 {
-  font-size: 24px;
-  font-weight: 100;
-  line-height: 28px;
+  font-family: "Quicksand", sans-serif;
 }
 
 li {
@@ -18,7 +12,7 @@ li {
 .weather-temperature h2 {
   font-size: 64px;
   line-height: 1;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 .weather-temperature .units {

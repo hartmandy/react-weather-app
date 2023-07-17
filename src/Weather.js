@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function Weather() {
-  const [query, setQuery] = useState("");
-  const [message, setMessage] = useState("");
-  const [temperature, setTemperature] = useState("");
+export default function Weather({ setWeatherData }) {
+  const [query, setQuery] = useState("Asheville");
+
+  useEffect(() => {
+    handleSearch();
+  }, []); // This empty dependency array ensures this hook only runs on mount
 
   function handleSearch(event) {
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
 
     if (query) {
-      let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
-      let units = "metric";
-      let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${apiKey}&units=${units}`;
+      const apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+      const units = "metric";
+      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${apiKey}&units=${units}`;
 
       axios.get(apiUrl).then(showTemperature);
     }
@@ -23,8 +27,16 @@ export default function Weather() {
   }
 
   function showTemperature(response) {
-    setTemperature(response.data.main.temp);
-    setMessage(`It is currently ${Math.round(temperature)}°C in ${query}`);
+    const timezoneOffsetSeconds = response.data.timezone;
+    const localTimestamp = (response.data.dt + timezoneOffsetSeconds) * 1000;
+    setWeatherData({
+      city: response.data.name,
+      date: new Date(localTimestamp),
+      temperature: Math.round(response.data.main.temp),
+      humidity: response.data.main.humidity,
+      description: response.data.weather[0].description,
+      wind: response.data.wind.speed,
+    });
   }
 
   return (
@@ -33,17 +45,16 @@ export default function Weather() {
         <input
           type="search"
           placeholder="Search a city"
-          className="w-75 px-4 py-2 mr-2 border-2 border-slate-300 rounded-lg focus:outline-none mb-3"
+          className="w-auto px-4 py-2 mr-2 border-2 border-slate-100 rounded-lg focus:outline-none mb-3 text-black"
           onChange={updateQuery}
         />
         <button
-          type="button"
-          className="px-4 py-2 bg-slate-500 text-white rounded-lg shadow-md hover:bg-slate-700"
+          type="submit"
+          className="px-4 py-2 bg-white text-black rounded-lg shadow-md hover:text-underline"
         >
           Search
         </button>
       </form>
-      <p>{message}</p>
     </div>
   );
 }
