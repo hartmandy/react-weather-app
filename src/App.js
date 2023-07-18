@@ -54,7 +54,11 @@ export default function App() {
     <div className="container mx-auto">
       <div className="container max-w-xl mt-40">
         <div className="rounded-xl border-slate-200 border-2 p-10 shadow-sm bg-blue-500 text-white tracking-wider">
-          <SearchForm onChange={handleChange} searchValue={searchValue} />
+          <SearchForm
+            onChange={handleChange}
+            searchValue={searchValue}
+            onSubmit={fetchCurrentWeather}
+          />
           {currentWeather && <CurrentWeather weatherData={currentWeather} />}
           <ForecastList forecast={forecast} />
         </div>
