@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-export default function Temperature(props) {
-  let [originalTemp, setOriginalTemp] = useState(null);
-  let [displayTemp, setDisplayTemp] = useState(null);
+export default function Temperature({ originalTemp }) {
+  let [displayTemp, setDisplayTemp] = useState(originalTemp);
 
   useEffect(() => {
-    setOriginalTemp(props.temperature);
-    setDisplayTemp(props.temperature);
-  }, [props.temperature]);
+    setDisplayTemp(originalTemp);
+  }, [originalTemp]);
 
   function showFahrenheit(event) {
     event.preventDefault();
