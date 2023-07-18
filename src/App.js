@@ -17,7 +17,7 @@ export default function App() {
   useEffect(() => {
     fetchCurrentWeather();
     // eslint-disable-next-line
-  }, [searchValue]);
+  }, []);
 
   const handleChange = (e) => {
     setSearchValue(e.target.value);
